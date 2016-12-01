@@ -12,6 +12,8 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var numberTextField: UITextField!
     
+    @IBOutlet weak var textView: UITextView!
+    
     @IBAction func submitButtonPressed(_ sender: Any) {
         if let input = numberTextField.text {
             let sequence = Sequence(number: input)
@@ -31,10 +33,7 @@ class ViewController: UIViewController {
                 alert.addAction(action)
                 self.present(alert, animated: true, completion: nil)
             } else {
-                let alert = UIAlertController(title: "Number", message: String(sequence.getStringSequence()), preferredStyle: .alert)
-                let action = UIAlertAction(title: "New Number", style: .default, handler: nil)
-                alert.addAction(action)
-                self.present(alert, animated: true, completion: nil)
+                textView.text = sequence.instructionsText()
             }
         }
     }

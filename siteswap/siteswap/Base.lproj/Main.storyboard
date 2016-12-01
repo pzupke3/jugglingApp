@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,39 +22,58 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KA1-OV-H0t">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KA1-OV-H0t">
                                 <rect key="frame" x="41" y="157" width="300" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Input a Number:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2pG-R5-BNX">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Input a Number:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2pG-R5-BNX">
                                 <rect key="frame" x="94" y="104" width="195" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mqg-yn-u1G">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mqg-yn-u1G">
                                 <rect key="frame" x="127" y="230" width="121" height="57"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="Submit"/>
                                 <connections>
                                     <action selector="submitButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="q25-tw-c3R"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Hgo-Uo-dyq">
+                                <rect key="frame" x="16" y="306" width="343" height="341"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="mqg-yn-u1G" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="111" id="2JF-Kn-Kua"/>
+                            <constraint firstAttribute="trailing" secondItem="Hgo-Uo-dyq" secondAttribute="trailing" constant="16" id="Cgi-tb-ZxJ"/>
+                            <constraint firstItem="2pG-R5-BNX" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="84" id="H3a-Bh-4G4"/>
+                            <constraint firstItem="Hgo-Uo-dyq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="HyP-ob-Eq3"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="2pG-R5-BNX" secondAttribute="trailing" constant="70" id="Lhp-N8-63M"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="KA1-OV-H0t" secondAttribute="trailing" constant="18" id="PjB-tp-6aa"/>
+                            <constraint firstItem="2pG-R5-BNX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="78" id="PsE-zP-xTe"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="mqg-yn-u1G" secondAttribute="trailing" constant="111" id="TQT-Zu-Kmj"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Hgo-Uo-dyq" secondAttribute="bottom" constant="20" id="UNA-AP-Cly"/>
+                            <constraint firstItem="KA1-OV-H0t" firstAttribute="top" secondItem="2pG-R5-BNX" secondAttribute="bottom" constant="32" id="YJg-u5-yEQ"/>
+                            <constraint firstItem="Hgo-Uo-dyq" firstAttribute="top" secondItem="mqg-yn-u1G" secondAttribute="bottom" constant="19" id="bS7-CS-H2f"/>
+                            <constraint firstItem="mqg-yn-u1G" firstAttribute="top" secondItem="KA1-OV-H0t" secondAttribute="bottom" constant="43" id="orE-5i-kbh"/>
+                            <constraint firstItem="KA1-OV-H0t" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="25" id="yq5-41-TKI"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="numberTextField" destination="KA1-OV-H0t" id="wuF-w4-J0i"/>
+                        <outlet property="textView" destination="Hgo-Uo-dyq" id="D5V-6Q-6pm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="85.599999999999994" y="138.98050974512745"/>
+            <point key="canvasLocation" x="8.8000000000000007" y="-239.73013493253376"/>
         </scene>
     </scenes>
 </document>
