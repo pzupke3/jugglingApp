@@ -62,6 +62,7 @@ class ViewController: UIViewController {
             text += "\n"
         }
         self.textView.text = text
+        self.textView.isEditable = false
         DispatchQueue.main.asyncAfter(deadline: .now() + Double(0.1)) {
             self.updateScreen(sequence: sequence)
         }

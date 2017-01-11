@@ -145,7 +145,7 @@ class Ball {
         case 0:
             return 4
         case 1:
-            return 4
+            return 6
         case 2:
             return 4
         case 3:
@@ -153,7 +153,7 @@ class Ball {
         case 4:
             return 4
         case 5:
-            return 2
+            return 4
         case 6:
             return 4
         case 7:
