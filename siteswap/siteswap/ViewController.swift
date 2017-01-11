@@ -33,11 +33,40 @@ class ViewController: UIViewController {
                 alert.addAction(action)
                 self.present(alert, animated: true, completion: nil)
             } else {
-                textView.text = sequence.instructionsText()
+                updateScreen(sequence: sequence)
+                    
+                        
+//                    self.textView.text = "hello"
+//                    var limit = true
+//                    while limit {
+//                        let time = DispatchTime.now() + 2
+//                        DispatchQueue.main.asyncAfter(deadline: time) {
+//                            limit = false
+//                        }
+//                    }
+
             }
         }
     }
     
+    func updateScreen(sequence: Sequence) {
+        var text = ""
+        sequence.updateBallSequence()
+        text += String(sequence.getBallArray().count) + "\n"
+        let charArray = sequence.getCharacterArray()
+        for i in 0...24 {
+            let index = 24 - i
+            for j in 0...54 {
+                text += String(charArray[index][j])
+            }
+            text += "\n"
+        }
+        self.textView.text = text
+        DispatchQueue.main.asyncAfter(deadline: .now() + Double(0.1)) {
+            self.updateScreen(sequence: sequence)
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.

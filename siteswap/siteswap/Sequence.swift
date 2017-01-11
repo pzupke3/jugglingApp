@@ -12,19 +12,145 @@ class Sequence {
     
     var digitArray: [Int]?
     var stringSequence: String
+    var ballArray: [Ball]
+    var time: Int
+    
+    var rightHandOccupied: Bool
+    var leftHandOccupied: Bool
     
     init(number: String) {
         stringSequence = number
+        time = 0
+        rightHandOccupied = false
+        leftHandOccupied = false
         let a: [Int]? = stringSequence.toArray()
         digitArray = a
+        var counter = a!.count
+        ballArray = [Ball]()
+        var ballCount = 0
+        
+        var sum = 0
+        for c in a! {
+            sum += c
+        }
+        
+        var isRightHand = true
+        while counter > 0 {
+            let ball = Ball(digit: (a?[(a?.count)! - counter])!, isRightHand: isRightHand)
+            if ball.getDigit() != 0 {
+                ballCount += 1
+            }
+            ballArray.append(ball)
+            isRightHand = !isRightHand
+            counter -= 1
+        }
+        
+        counter = 0
+        while ballCount < (sum / a!.count) || !isRightHand {
+            let ball = Ball(digit: ballArray[counter].getDigit(), isRightHand: isRightHand)
+            ballArray.append(ball)
+            if ball.getDigit() != 0 {
+                ballCount += 1
+            }
+            isRightHand = !isRightHand
+            if counter == a!.count {
+                counter = 0
+            } else {
+                counter += 1
+            }
+        }
     }
     
     func getDigitArray() -> [Int]? {
         return digitArray
     }
     
+    func getBallArray() -> [Ball] {
+        return ballArray
+    }
+    
     func getStringSequence() -> String {
         return stringSequence
+    }
+    
+    func getCharacterArray() -> [[Character]] {
+        var myArray: [[Character]] = [[Character]](repeating:[Character](repeating:" ", count: 55), count: 25)
+        myArray[3][8] = "U"
+        myArray[3][51] = "U"
+        if leftHandOccupied {
+            myArray[4][8] = "O"
+        }
+        if rightHandOccupied {
+            myArray[4][51] = "O"
+        }
+        for ball in ballArray {
+            if ball.isActive() && ball.getDigit() != 0 {
+                myArray[ball.getYPosition()][ball.getXPosition()] = "O"
+            }
+        }
+        
+        return myArray
+    }
+    
+    func updateBallSequence() -> Void {
+        var atLeastOneActive = false
+        var isSkipped = false
+        for i in 0...ballArray.count-1 {
+            if isSkipped {
+                isSkipped = false
+            } else {
+                if ballArray[i].isActive() {
+                    atLeastOneActive = true
+                    ballArray[i].update()
+                    if !ballArray[i].isActive() {
+                        if ballArray[i].getIsRightHand() {
+                            if ballArray[i].getDigit() % 2 == 0 {
+                                rightHandOccupied = true
+                            } else {
+                                leftHandOccupied = true
+                            }
+                        } else {
+                            if ballArray[i].getDigit() % 2 == 0 {
+                                leftHandOccupied = true
+                            } else {
+                                rightHandOccupied = true
+                            }
+                        }
+                    }
+                    if ballArray[i].canPass() && !ballArray[i].getHasPassed() {
+                        if i == ballArray.count-1 && !ballArray[0].isActive() {
+                            ballArray[i].pass()
+                            ballArray[0].makeActive()
+                            if ballArray[0].getIsRightHand() {
+                                rightHandOccupied = false
+                            } else {
+                                leftHandOccupied = false
+                            }
+                            isSkipped = true
+                        } else {
+                            if i != ballArray.count-1 && !ballArray[i+1].isActive() {
+                                ballArray[i].pass()
+                                ballArray[i+1].makeActive()
+                                if ballArray[i+1].getIsRightHand() {
+                                    rightHandOccupied = false
+                                } else {
+                                    leftHandOccupied = false
+                                }
+                                isSkipped = true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if !atLeastOneActive {
+            ballArray[0].makeActive()
+            if ballArray[0].getIsRightHand() {
+                rightHandOccupied = false
+            } else {
+                leftHandOccupied = false
+            }
+        }
     }
     
     func length() -> Int {
@@ -96,7 +222,6 @@ class Sequence {
         var instructions = [String]()
         if length() % 2 == 0 {
             for i in 0...length()-1 {
-                let number = digitArray?[i]
                 instructions.append("The " + hand + " hand " + instruction(int: (digitArray?[i])!))
                 if hand == "right" {
                     hand = "left"
