@@ -44,20 +44,15 @@ class Sequence {
             isRightHand = !isRightHand
             counter -= 1
         }
-        
-        counter = 0
+
         while ballCount < (sum / a!.count) || !isRightHand {
-            
-            let ball = Ball(digit: ballArray[counter].getDigit(), isRightHand: isRightHand)
-            ballArray.append(ball)
-            if ball.getDigit() != 0 {
-                ballCount += 1
-            }
-            isRightHand = !isRightHand
-            if counter == a!.count {
-                counter = 0
-            } else {
-                counter += 1
+            for digit in a! {
+                let ball = Ball(digit: digit, isRightHand: isRightHand)
+                ballArray.append(ball)
+                if ball.getDigit() != 0 {
+                    ballCount += 1
+                }
+                isRightHand = !isRightHand
             }
         }
     }

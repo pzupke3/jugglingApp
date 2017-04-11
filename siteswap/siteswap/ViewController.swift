@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var numberTextField: UITextField!
     
@@ -34,16 +34,6 @@ class ViewController: UIViewController {
                 self.present(alert, animated: true, completion: nil)
             } else {
                 updateScreen(sequence: sequence)
-                    
-                        
-//                    self.textView.text = "hello"
-//                    var limit = true
-//                    while limit {
-//                        let time = DispatchTime.now() + 2
-//                        DispatchQueue.main.asyncAfter(deadline: time) {
-//                            limit = false
-//                        }
-//                    }
 
             }
         }
@@ -52,7 +42,7 @@ class ViewController: UIViewController {
     func updateScreen(sequence: Sequence) {
         var text = ""
         sequence.updateBallSequence()
-        text += String(sequence.getBallArray().count) + "\n"
+        //text += String(ballArray.count) + "\n"
         let charArray = sequence.getCharacterArray()
         for i in 0...24 {
             let index = 24 - i

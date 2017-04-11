@@ -153,7 +153,7 @@ class Ball {
         case 4:
             return 4
         case 5:
-            return 4
+            return 7
         case 6:
             return 4
         case 7:
